@@ -89,6 +89,8 @@ gulp.task('unit-test', function() {
     .on("error", notifyError)
 });
 
+gulp.task('browser-test', plugins.shell.task([ 'testem ci -f tests/testem.json' ]));
+
 gulp.task('build', ['vendor-js','app-js','copy']);
 
 gulp.task('watch', ['default'], function(){
