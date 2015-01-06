@@ -2,6 +2,7 @@ var React = require('react'),
     _ = require('underscore');
 
 module.exports = React.createClass({
+  displayName:"StationsView",
   render: function(){
     var onStationClicked = this.props.onStationClicked;
     var stationNodes = _.map( this.props.stations, function(station){

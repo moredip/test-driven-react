@@ -3,6 +3,7 @@ var React = require('react'),
 
 
 module.exports = React.createClass({
+  displayName:"MainView",
   render: function(){
     return <StationsView stations={this.props.stations}/>;
   }
