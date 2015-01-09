@@ -3,6 +3,10 @@ var React = require('react'),
 
 module.exports = React.createClass({
   displayName:"StationsView",
+  propTypes: {
+    onStationClicked: React.PropTypes.func.isRequired
+  },
+
   render: function(){
     var onStationClicked = this.props.onStationClicked;
     var stationNodes = _.map( this.props.stations, function(station){

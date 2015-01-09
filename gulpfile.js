@@ -7,7 +7,6 @@ var gulp = require('gulp'),
     through = require('through'),
     notifier = require("node-notifier"),
     browserify = require('browserify');
-    
 
 var BUILD_DIR = 'build';
 var BROWSERIFY_VENDORED_MODULES = ['react','react/addons','underscore'];
@@ -17,8 +16,8 @@ function handleError(err) {
   this.emit('end');
 }
 
-gulp.task('clean', function(cb){
-  return del([BUILD_DIR],cb);
+gulp.task('clean', function(){
+  return del.sync([BUILD_DIR]);
 });
 
 gulp.task('copy', function () {

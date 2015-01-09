@@ -15,7 +15,7 @@ var boot = function(appContainer){
     return React.render( theApp, appContainer );
   }
 
-  appController(appRenderer,stationRepo);
+  appController(appRenderer, stationRepo);
 };
 
 module.exports = boot;

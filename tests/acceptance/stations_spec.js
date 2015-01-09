@@ -12,8 +12,8 @@ describe('the main station list', function() {
     $stations = $(appContainer).find('.station');
     expect($stations).to.exist;
 
-    var stationNames = $stations.map( function(){ 
-      return $(this).text(); 
+    var stationNames = $stations.map( function(){
+      return $(this).text();
     }).toArray();
 
     expect(stationNames).to.include('Embarcadero');

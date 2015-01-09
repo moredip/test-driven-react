@@ -17,6 +17,6 @@
     "build/browser_specs.js"
   ],
   "fail_on_zero_tests":true,
-  "before_tests": "gulp browser-specs-js"
+  "before_tests": "gulp browser-specs-js vendor-js"
 }
 
