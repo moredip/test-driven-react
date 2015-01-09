@@ -1,7 +1,8 @@
 var React = require('react'),
     MainView = require('./views/main_view'),
     appController = require('./app_controller'),
-    createStationRepo = require('./station_repo');
+    createStationRepo = require('./station_repo'),
+    createEtasRepo = require('./etas_repo');
 
 var boot = function(appContainer){
   if( typeof appContainer === 'undefined' ){
@@ -9,13 +10,14 @@ var boot = function(appContainer){
   }
 
   var stationRepo = createStationRepo();
+  var etasRepo = createEtasRepo();
 
   var appRenderer = function(appState){
     var theApp = React.createElement( MainView, appState );
     return React.render( theApp, appContainer );
   }
 
-  appController(appRenderer, stationRepo);
+  appController(appRenderer, stationRepo, etasRepo);
 };
 
 module.exports = boot;

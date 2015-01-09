@@ -6,7 +6,10 @@ var appController = require('../../js/app_controller'),
     createStationRepo = require('../../js/station_repo');
 
 var nullRenderer = _.identity,
-    genericStationRepo = createStationRepo([]);
+    genericStationRepo = createStationRepo([]),
+    dummyEtasRepo = {
+      fetchEtasFor: _.identity
+    };
 
 describe( 'appController', function(){
   it('exists', function(){
@@ -60,7 +63,7 @@ describe( 'appController', function(){
         stationRepo = createStationRepo(stationsFromRepo),
         spyRenderer = sinon.spy();
 
-    appController(spyRenderer,stationRepo);
+    appController(spyRenderer,stationRepo,dummyEtasRepo);
     expect(spyRenderer).to.have.been.calledOnce;
 
     var appStatePassedToRenderer = spyRenderer.firstCall.args[0];
@@ -74,6 +77,26 @@ describe( 'appController', function(){
     expect( appStatePassedToRendererTheSecondTime ).to.have.property('station');
 
     expect( appStatePassedToRendererTheSecondTime.station ).to.equal(targetStation);
-  })
+  });
+
+  it('loads etas from the eta_repo when showing station details', function(){
+    var stationsFromRepo = [
+          {id: 'a-station-id', name:"a station"}
+        ],
+        targetStation = stationsFromRepo[0],
+        stationRepo = createStationRepo(stationsFromRepo),
+        etasRepo = {
+          fetchEtasFor: sinon.spy()
+        },
+        spyRenderer = sinon.spy();
+
+    appController(spyRenderer,stationRepo,etasRepo);
+    expect(spyRenderer).to.have.been.calledOnce;
+
+    var appStatePassedToRenderer = spyRenderer.firstCall.args[0];
+    appStatePassedToRenderer.onStationClicked(targetStation.id);
+
+    expect(etasRepo.fetchEtasFor).to.have.been.called;
+  });
 
 });
