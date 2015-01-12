@@ -1,4 +1,5 @@
 var Helpers = require('./helpers'),
+    Q = require('Q'),
     React = require('react/addons'),
     TestUtils = React.addons.TestUtils;
 
@@ -37,9 +38,12 @@ describe('the main station list', function() {
 
     TestUtils.Simulate.click($listingForBayfairStation);
 
-    $stationDetailsTitle = $(appContainer).find('h1');
-    expect($stationDetailsTitle).to.exist;
-    expect($stationDetailsTitle).to.have.text('Bayfair');
+    // NO!!!!! replace with spin-assert
+    Q.delay(50).then(function(){
+      $stationDetailsTitle = $(appContainer).find('h1');
+      expect($stationDetailsTitle).to.exist;
+      expect($stationDetailsTitle).to.have.text('Bayfair');
+    });
   });
 });
 

@@ -1,10 +1,23 @@
+var Q = require('Q');
+
+var stationDetailsGenerator = function(stationsRepo,etasRepo,stationId){
+  return etasRepo.fetchEtasFor(stationId).then(function(etas){
+    station = stationsRepo.getStationById(stationId);
+    return {
+      station:station,
+      etas:etas
+    };
+  });
+}
+
 var appController = function(appRenderer, stationsRepo,etasRepo){
   var stations = stationsRepo.getStations();
 
   var onStationClicked = function(stationId){
-    etas = etasRepo.fetchEtasFor(stationId);
-    var appState = { station: stationsRepo.getStationById(stationId) };
-    appRenderer(appState);
+    return stationDetailsGenerator(stationsRepo,etasRepo,stationId).then( function(stationAppState){
+      var appState = {station:stationAppState};
+      appRenderer(appState);
+    });
   };
 
   var appState = {

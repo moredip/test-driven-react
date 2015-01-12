@@ -9,4 +9,13 @@ describe('ETAs repo', function(){
     expect(repo).to.exist;
     expect(repo).to.respondTo('fetchEtasFor');
   });
+
+  it('returns a resolving promise of ETAs', function(done){
+    var repo = createEtasRepo();
+    repo.fetchEtasFor('blah').then( function(){
+      done();
+    });
+  });
+
+  // TODO: actually build out XHR gateway
 });
