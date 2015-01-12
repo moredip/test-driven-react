@@ -13,17 +13,13 @@ var nullRenderer = _.identity,
     };
 
 describe( 'appController', function(){
-  it('exists', function(){
-    expect(appController).to.exist;
-    expect(appController).to.satisfy(_.isFunction);
-  });
 
   it('loads stations from the station repo', function(){
     var spyStationsRepo = {
       getStations: sinon.spy()
     };
 
-    appController(nullRenderer,spyStationsRepo);
+    appController({appRenderer:nullRenderer,stationRepo:spyStationsRepo});
 
     expect(spyStationsRepo.getStations).to.have.been.called;
   });
@@ -36,7 +32,7 @@ describe( 'appController', function(){
         stationRepo = createStationRepo(stationsFromRepo),
         spyRenderer = sinon.spy();
 
-    appController(spyRenderer,stationRepo);
+    appController({appRenderer:spyRenderer,stationRepo:stationRepo});
 
     expect(spyRenderer).to.have.been.called;
     var appStatePassedToRenderer = spyRenderer.firstCall.args[0];
@@ -47,7 +43,7 @@ describe( 'appController', function(){
   it('passes onStationClicked handler to app state', function(){
     var spyRenderer = sinon.spy();
 
-    appController(spyRenderer,genericStationRepo);
+    appController({appRenderer:spyRenderer,stationRepo:genericStationRepo});
 
     expect(spyRenderer).to.have.been.called;
     var appStatePassedToRenderer = spyRenderer.firstCall.args[0];
@@ -64,7 +60,12 @@ describe( 'appController', function(){
         stationRepo = createStationRepo(stationsFromRepo),
         spyRenderer = sinon.spy();
 
-    appController(spyRenderer,stationRepo,dummyEtasRepo);
+
+    appController({
+      appRenderer:spyRenderer,
+      stationRepo:stationRepo,
+      etasRepo:dummyEtasRepo});
+
     expect(spyRenderer).to.have.been.calledOnce;
 
     var appStatePassedToRenderer = spyRenderer.firstCall.args[0];
@@ -94,7 +95,11 @@ describe( 'appController', function(){
         },
         spyRenderer = sinon.spy();
 
-    appController(spyRenderer,stationRepo,etasRepo);
+    appController({
+      appRenderer:spyRenderer,
+      stationRepo:stationRepo,
+      etasRepo:etasRepo});
+
     expect(spyRenderer).to.have.been.calledOnce;
 
     var appStatePassedToRenderer = spyRenderer.firstCall.args[0];
