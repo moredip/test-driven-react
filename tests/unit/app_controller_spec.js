@@ -8,6 +8,9 @@ var appController = require('../../js/app_controller'),
 
 var nullRenderer = _.identity,
     genericStationRepo = createStationRepo([]),
+    dummyStationDetailsController = {
+      appStateForStationWithId: _.constant(Q({}))
+    },
     dummyEtasRepo = {
       fetchEtasFor: _.constant(Q([]))
     };
@@ -51,63 +54,111 @@ describe( 'appController', function(){
     expect( appStatePassedToRenderer.onStationClicked ).to.satisfy(_.isFunction);
   });
 
-  it('responds to a station being clicked by showing station details for that station', function(){
-    var stationsFromRepo = [
-          {id: 's1', name:"station one"},
-          {id: 's2', name:"station two"}
-        ],
-        targetStation = stationsFromRepo[1],
-        stationRepo = createStationRepo(stationsFromRepo),
-        spyRenderer = sinon.spy();
-
+  it('responds to a station being clicked by asking the station details controller for the corresponding app state for that station', function(){
+    var spyRenderer = sinon.spy();
+    var spyStationDetailsController = {
+      appStateForStationWithId: sinon.stub().returns(Q({}))
+    };
 
     appController({
       appRenderer:spyRenderer,
-      stationRepo:stationRepo,
-      etasRepo:dummyEtasRepo});
-
-    expect(spyRenderer).to.have.been.calledOnce;
-
-    var appStatePassedToRenderer = spyRenderer.firstCall.args[0];
-    return appStatePassedToRenderer.onStationClicked(targetStation.id).then( function(){
-      dummyEtasRepo.fetchEtasFor().then(function(){
-        expect(spyRenderer).to.have.been.calledTwice;
-
-        var appStatePassedToRendererTheSecondTime = spyRenderer.secondCall.args[0];
-
-        expect( appStatePassedToRendererTheSecondTime ).not.to.have.property('stations');
-        expect( appStatePassedToRendererTheSecondTime ).to.have.property('station');
-
-        expect( appStatePassedToRendererTheSecondTime.station ).to.equal(targetStation);
+      stationRepo:genericStationRepo,
+      stationDetailsController:spyStationDetailsController
       });
-    });
-  });
-
-  it('loads etas from the eta_repo when showing station details', function(){
-    var stationsFromRepo = [
-          {id: 'a-station-id', name:"a station"}
-        ],
-        targetStation = stationsFromRepo[0],
-        stationRepo = createStationRepo(stationsFromRepo),
-        etasFromRepo = ['fake-eta-1','fake-eta-2'],
-        etasRepo = {
-          fetchEtasFor: _.constant(Q(etasFromRepo))
-        },
-        spyRenderer = sinon.spy();
-
-    appController({
-      appRenderer:spyRenderer,
-      stationRepo:stationRepo,
-      etasRepo:etasRepo});
 
     expect(spyRenderer).to.have.been.calledOnce;
 
-    var appStatePassedToRenderer = spyRenderer.firstCall.args[0];
-    return appStatePassedToRenderer.onStationClicked(targetStation.id).then( function(){
-      var appStatePassedToRendererTheSecondTime = spyRenderer.secondCall.args[0];
+    var onStationClicked = spyRenderer.firstCall.args[0].onStationClicked;
 
-      expect( appStatePassedToRendererTheSecondTime ).to.have.deep.property('station.etas',etasFromRepo);
+    onStationClicked('some-station-id');
+
+    expect(spyStationDetailsController.appStateForStationWithId).to.have.been.calledWith('some-station-id');
+  });
+
+  it('uses the station detail app state to re-render the app', function(){
+    var spyRenderer = sinon.spy();
+        stationDetailsAppState = {station:'details'},
+        fakeStationDetailsController = {
+      appStateForStationWithId: _.constant(Q(stationDetailsAppState))
+    };
+
+    appController({
+      appRenderer:spyRenderer,
+      stationRepo:genericStationRepo,
+      stationDetailsController:fakeStationDetailsController
+      });
+
+    expect(spyRenderer).to.have.been.calledOnce;
+
+    var onStationClicked = spyRenderer.firstCall.args[0].onStationClicked;
+
+    return onStationClicked('blah').then(function(){
+      expect(spyRenderer).to.have.been.calledTwice;
+      var expectedAppState = {
+        station: stationDetailsAppState
+      };
+      var appStatePassedToRendererTheSecondTime = spyRenderer.secondCall.args[0];
+      expect(appStatePassedToRendererTheSecondTime).to.deep.equal(expectedAppState);
     });
   });
+
+  //it('responds to a station being clicked by showing station details for that station', function(){
+    //var stationsFromRepo = [
+          //{id: 's1', name:"station one"},
+          //{id: 's2', name:"station two"}
+        //],
+        //targetStation = stationsFromRepo[1],
+        //stationRepo = createStationRepo(stationsFromRepo),
+        //spyRenderer = sinon.spy();
+
+
+    //appController({
+      //appRenderer:spyRenderer,
+      //stationRepo:stationRepo,
+      //etasRepo:dummyEtasRepo});
+
+    //expect(spyRenderer).to.have.been.calledOnce;
+
+    //var appStatePassedToRenderer = spyRenderer.firstCall.args[0];
+    //return appStatePassedToRenderer.onStationClicked(targetStation.id).then( function(){
+      //dummyEtasRepo.fetchEtasFor().then(function(){
+        //expect(spyRenderer).to.have.been.calledTwice;
+
+        //var appStatePassedToRendererTheSecondTime = spyRenderer.secondCall.args[0];
+
+        //expect( appStatePassedToRendererTheSecondTime ).not.to.have.property('stations');
+        //expect( appStatePassedToRendererTheSecondTime ).to.have.property('station');
+
+        //expect( appStatePassedToRendererTheSecondTime.station ).to.equal(targetStation);
+      //});
+    //});
+  //});
+
+  //it('loads etas from the eta_repo when showing station details', function(){
+    //var stationsFromRepo = [
+          //{id: 'a-station-id', name:"a station"}
+        //],
+        //targetStation = stationsFromRepo[0],
+        //stationRepo = createStationRepo(stationsFromRepo),
+        //etasFromRepo = ['fake-eta-1','fake-eta-2'],
+        //etasRepo = {
+          //fetchEtasFor: _.constant(Q(etasFromRepo))
+        //},
+        //spyRenderer = sinon.spy();
+
+    //appController({
+      //appRenderer:spyRenderer,
+      //stationRepo:stationRepo,
+      //etasRepo:etasRepo});
+
+    //expect(spyRenderer).to.have.been.calledOnce;
+
+    //var appStatePassedToRenderer = spyRenderer.firstCall.args[0];
+    //return appStatePassedToRenderer.onStationClicked(targetStation.id).then( function(){
+      //var appStatePassedToRendererTheSecondTime = spyRenderer.secondCall.args[0];
+
+      //expect( appStatePassedToRendererTheSecondTime ).to.have.deep.property('station.etas',etasFromRepo);
+    //});
+  //});
 
 });

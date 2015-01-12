@@ -13,15 +13,22 @@ var stationDetailsGenerator = function(stationRepo,etasRepo,stationId){
 var appController = function(deps){
   var appRenderer = deps.appRenderer,
       stationRepo = deps.stationRepo,
+      stationDetailsController = deps.stationDetailsController,
       etasRepo = deps.etasRepo;
 
   var stations = stationRepo.getStations();
 
   var onStationClicked = function(stationId){
-    return stationDetailsGenerator(stationRepo,etasRepo,stationId).then( function(stationAppState){
-      var appState = {station:stationAppState};
+    return stationDetailsController.appStateForStationWithId(stationId).then(function(stationAppState){
+      var appState = {
+        station: stationAppState
+      }
       appRenderer(appState);
     });
+    //return stationDetailsGenerator(stationRepo,etasRepo,stationId).then( function(stationAppState){
+      //var appState = {station:stationAppState};
+      //appRenderer(appState);
+    //});
   };
 
   var appState = {
