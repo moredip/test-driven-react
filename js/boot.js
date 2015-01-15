@@ -2,6 +2,7 @@ var React = require('react'),
     MainView = require('./views/main_view'),
     appController = require('./app_controller'),
     createStationRepo = require('./station_repo'),
+    ajaxClient = require('./ajax_client'),
     createEtasRepo = require('./etas_repo'),
     createStationDetailsController = require('./station_details_controller');
 
@@ -11,7 +12,7 @@ var boot = function(appContainer){
   }
 
   var stationRepo = createStationRepo(),
-      etasRepo = createEtasRepo(),
+      etasRepo = createEtasRepo(ajaxClient),
       stationDetailsController = createStationDetailsController({stationRepo:stationRepo,etasRepo:etasRepo});
 
   var appRenderer = function(appState){
