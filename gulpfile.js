@@ -22,6 +22,7 @@ gulp.task('clean', function(){
 
 gulp.task('copy', function () {
   var inputs = [
+    './css/**/*',
     './index.html'
   ];
 
@@ -96,6 +97,7 @@ gulp.task('watch', ['default'], function(){
   var watchOpts = {debounceDelay:2000}, // workaround for editors saving file twice: http://stackoverflow.com/questions/21608480/gulp-js-watch-task-runs-twice-when-saving-files
       watchTargets = {
     './index.html': ['copy'],
+    './css/**/*': ['copy'],
     './js/**/*': ['unit-test','app-js'],
     './tests/unit/**/*': ['unit-test']
   };

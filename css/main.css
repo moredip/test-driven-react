@@ -1,0 +1,103 @@
+a {
+  text-decoration: inherit; 
+  color: inherit;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+#toast-notice {
+  text-align: center;
+  background: rgb(70,127,212);
+  color: white;
+  margin: 0;
+  padding: 0.3em 0;
+  font-size: 1.6rem;
+}
+
+/*#toast-notice { display: none; }*/
+/*#toast-notice.show { display: inherit } */
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-bottom: 1pt solid black; 
+}
+
+/*#stations, #etds {*/
+  /*font-size: 20pt;*/
+/*}*/
+
+li {
+  font-size: 20pt;
+  text-align: center;
+  border-top: 1pt solid black;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+li.station{
+  padding: 0.5em 0;
+}
+
+#etds h1 {
+  font-size: 1.4em;
+  text-align: center;
+}
+
+#etds .line-red { background-color: #e11a57;  }
+#etds .line-orange { background-color: #f9a11d; }
+#etds .line-yellow { background-color: #fdf057; }
+#etds .line-green { background-color: #4fb848; }
+#etds .line-blue { background-color: #2aabe2; }
+
+/*#etds li { */
+  /*border-top: 1pt solid white; */
+/*}*/
+
+.stations-list li {
+  padding: 0.5em 0;
+}
+
+.etd-label {
+  padding: 0.5em 0;
+}
+
+/*@-webkit-keyframes slide-down {*/
+  /*from {*/
+    /*margin-top: -10%;*/
+  /*}*/
+
+  /*to {*/
+    /*margin-top: 0;*/
+  /*}*/
+/*}*/
+
+/*.etd-detail {*/
+  /*-webkit-animation-duration: 1s;*/
+  /*-webkit-animation-name: slide-down;*/
+/*}*/
+
+.back-button {
+  width: 0.5em;
+  margin: 0;
+  margin-right: 0.5em;
+  cursor: pointer;
+}
+
+.reload-button {
+  width: 0.5em;
+  margin: 0;
+  margin-left: 0.5em;
+  cursor: pointer;
+}
