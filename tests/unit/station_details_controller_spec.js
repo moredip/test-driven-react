@@ -44,7 +44,8 @@ describe( 'stationDetailsController', function(){
         });
 
         return stationDetailsController.appStateForStationWithId(someStation.id).then( function(appState){
-            expect(appState).to.have.property('etas',etasFromRepo);
+            expect(appState).to.have.property('etas');
+            expect(appState.etas).to.have.length(2);
         });
   });
 

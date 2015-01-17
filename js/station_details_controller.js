@@ -1,4 +1,6 @@
-var Q = require('q');
+var Q = require('q'),
+    _ = require('underscore'),
+    etaPresenter = require('./eta_presenter');
 
 var createStationDetailsController = function(deps){
   var stationRepo = deps.stationRepo,
@@ -6,11 +8,12 @@ var createStationDetailsController = function(deps){
 
   var appStateForStationWithId = function(stationId){
     return etasRepo.fetchEtasFor(stationId).then( function(etas){
+      presentedEtas = _.map(etas,etaPresenter);
       var station = stationRepo.getStationById(stationId),
           stationAppState = {
             name: station.name,
             id: station.id,
-            etas: etas
+            etas: presentedEtas
           };
       return stationAppState;
     });

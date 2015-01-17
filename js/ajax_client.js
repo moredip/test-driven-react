@@ -5,7 +5,10 @@ var Q = require("q");
 var get = function (url, timeout) {
   var response = Q.defer();
   var request = new XMLHttpRequest(); // ActiveX blah blah
+
   request.open("GET", url, true);
+  request.setRequestHeader( "Accept", "application/json, text/javascript" );
+
   request.onreadystatechange = function () {
     if (request.readyState === 4) {
       if (request.status === 200) {

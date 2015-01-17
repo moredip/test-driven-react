@@ -1,4 +1,5 @@
 var React = require('react'),
+    _ = require('underscore'),
     MainView = require('./views/main_view'),
     appController = require('./app_controller'),
     createStationRepo = require('./station_repo'),
@@ -6,14 +7,21 @@ var React = require('react'),
     createEtasRepo = require('./etas_repo'),
     createStationDetailsController = require('./station_details_controller');
 
-var boot = function(appContainer){
-  if( typeof appContainer === 'undefined' ){
+var boot = function(appContainer, deps){
+  if( _.isUndefined(deps) ){
+    deps = {};
+  }
+  
+  if( _.isUndefined(appContainer) ){
     appContainer = document.getElementsByTagName('main')[0];
   }
 
-  var stationRepo = createStationRepo(),
-      etasRepo = createEtasRepo(ajaxClient),
-      stationDetailsController = createStationDetailsController({stationRepo:stationRepo,etasRepo:etasRepo});
+  _.defaults(deps,{
+    stationRepo: createStationRepo(),
+    etasRepo: createEtasRepo(ajaxClient),
+  });
+
+  var stationDetailsController = createStationDetailsController({stationRepo:deps.stationRepo,etasRepo:deps.etasRepo});
 
   var appRenderer = function(appState){
     var theApp = React.createElement( MainView, appState );
@@ -22,7 +30,7 @@ var boot = function(appContainer){
 
   appController({
     appRenderer:appRenderer,
-    stationRepo:stationRepo,
+    stationRepo:deps.stationRepo,
     stationDetailsController:stationDetailsController
   });
 };

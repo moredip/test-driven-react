@@ -1,5 +1,6 @@
 var Helpers = require('./helpers'),
     Q = require('Q'),
+    _ = require('underscore'),
     React = require('react/addons'),
     TestUtils = React.addons.TestUtils;
 
@@ -25,8 +26,18 @@ describe('the main station list', function() {
   });
 
   it('shows station details when you click on a station', function(){
-    appContainer = document.createElement('main');
-    boot(appContainer);
+    var fakeEtaResponse = [
+          {dest_abbr: 'EMBR', route: 'YELLOW', etd: 0},
+          {dest_abbr: 'NBRK', route: 'RED', etd: 1},
+          {dest_abbr: 'RICH', route: 'BLUE', etd: 12}
+        ],
+        fakeEtasRepo = {
+          fetchEtasFor: _.constant(Q(fakeEtaResponse))
+        },
+        appContainer = document.createElement('main');
+
+    document.body.appendChild(appContainer);
+    boot(appContainer,{etasRepo:fakeEtasRepo});
 
     expect($(appContainer)).to.exist;
 
@@ -39,10 +50,13 @@ describe('the main station list', function() {
     TestUtils.Simulate.click($listingForBayfairStation);
 
     // NO!!!!! replace with spin-assert
-    Q.delay(50).then(function(){
+    return Q.delay(50).then(function(){
       $stationDetailsTitle = $(appContainer).find('h1');
       expect($stationDetailsTitle).to.exist;
       expect($stationDetailsTitle).to.have.text('Bayfair');
+
+      $departures = $(appContainer).find('.departure');
+      expect($departures).to.have.length(3);
     });
   });
 });

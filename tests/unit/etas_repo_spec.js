@@ -47,7 +47,4 @@ describe('ETAs repo', function(){
   });
 
   // handle error
-
-  // request json in header
-
 });
