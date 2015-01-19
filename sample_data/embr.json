@@ -1,0 +1,110 @@
+[
+  {
+    "dest_abbr": "rich",
+    "dest_name": "Richmond",
+    "route": "RED",
+    "etd": 2
+  },
+  {
+    "dest_abbr": "mlbr",
+    "dest_name": "Millbrae",
+    "route": "YELLOW",
+    "etd": 3
+  },
+  {
+    "dest_abbr": "frmt",
+    "dest_name": "Fremont",
+    "route": "GREEN",
+    "etd": 5
+  },
+  {
+    "dest_abbr": "daly",
+    "dest_name": "Daly City",
+    "route": "GREEN",
+    "etd": 6
+  },
+  {
+    "dest_abbr": "frmt",
+    "dest_name": "Fremont",
+    "route": "GREEN",
+    "etd": 8
+  },
+  {
+    "dest_abbr": "pitt",
+    "dest_name": "Pittsburg/Bay Point",
+    "route": "YELLOW",
+    "etd": 11
+  },
+  {
+    "dest_abbr": "daly",
+    "dest_name": "Daly City",
+    "route": "RED",
+    "etd": 12
+  },
+  {
+    "dest_abbr": "daly",
+    "dest_name": "Daly City",
+    "route": "BLUE",
+    "etd": 16
+  },
+  {
+    "dest_abbr": "dubl",
+    "dest_name": "Dublin/Pleasanton",
+    "route": "BLUE",
+    "etd": 18
+  },
+  {
+    "dest_abbr": "mlbr",
+    "dest_name": "Millbrae",
+    "route": "YELLOW",
+    "etd": 22
+  },
+  {
+    "dest_abbr": "rich",
+    "dest_name": "Richmond",
+    "route": "RED",
+    "etd": 23
+  },
+  {
+    "dest_abbr": "frmt",
+    "dest_name": "Fremont",
+    "route": "GREEN",
+    "etd": 27
+  },
+  {
+    "dest_abbr": "pitt",
+    "dest_name": "Pittsburg/Bay Point",
+    "route": "YELLOW",
+    "etd": 31
+  },
+  {
+    "dest_abbr": "dubl",
+    "dest_name": "Dublin/Pleasanton",
+    "route": "BLUE",
+    "etd": 38
+  },
+  {
+    "dest_abbr": "rich",
+    "dest_name": "Richmond",
+    "route": "RED",
+    "etd": 42
+  },
+  {
+    "dest_abbr": "mlbr",
+    "dest_name": "Millbrae",
+    "route": "YELLOW",
+    "etd": 42
+  },
+  {
+    "dest_abbr": "pitt",
+    "dest_name": "Pittsburg/Bay Point",
+    "route": "YELLOW",
+    "etd": 50
+  },
+  {
+    "dest_abbr": "dubl",
+    "dest_name": "Dublin/Pleasanton",
+    "route": "BLUE",
+    "etd": 58
+  }
+]
