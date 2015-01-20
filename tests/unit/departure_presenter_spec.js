@@ -3,27 +3,27 @@ var Helpers = require('./helpers'),
     Q = require('q'),
     sinon = require('sinon');
 
-var etaPresenter = require('../../js/eta_presenter');
+var departurePresenter = require('../../js/departure_presenter');
 
-describe( 'ETA presenter', function(){
+describe( 'Departure presenter', function(){
   it('maps route names to css class names', function(){
-    var eta = {
+    var departure = {
       dest_abbr: "blah",
       route: "YELLOW",
       etd: 10
     };
-    var presentation = etaPresenter(eta);
+    var presentation = departurePresenter(departure);
 
     expect(presentation).to.have.property('cssClasses','yellow-route');
   });
 
   it('has human-readable departure time', function(){
-    var eta = {
+    var departure = {
       dest_abbr: "blah",
       route: "blah",
       etd: 10
     };
-    var presentation = etaPresenter(eta);
+    var presentation = departurePresenter(departure);
 
     expect(presentation).to.have.property('departing','10 mins');
   });
