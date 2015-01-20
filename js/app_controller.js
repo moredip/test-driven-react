@@ -1,15 +1,5 @@
 var Q = require('Q');
 
-var stationDetailsGenerator = function(stationRepo,etasRepo,stationId){
-  return etasRepo.fetchEtasFor(stationId).then(function(etas){
-    station = stationRepo.getStationById(stationId);
-    return {
-      station:station,
-      etas:etas
-    };
-  });
-}
-
 var appController = function(deps){
   var appRenderer = deps.appRenderer,
       stationRepo = deps.stationRepo,
@@ -25,10 +15,6 @@ var appController = function(deps){
       }
       appRenderer(appState);
     });
-    //return stationDetailsGenerator(stationRepo,etasRepo,stationId).then( function(stationAppState){
-      //var appState = {station:stationAppState};
-      //appRenderer(appState);
-    //});
   };
 
   var appState = {

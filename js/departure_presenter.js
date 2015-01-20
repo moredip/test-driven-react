@@ -1,6 +1,6 @@
 /****************
 
-SAMPLE ETA STRUCTURE:
+SAMPLE DEPARTURE STRUCTURE:
 
 {
   dest_abbr: 'EMBR',
@@ -10,14 +10,11 @@ SAMPLE ETA STRUCTURE:
 
 ******************/
 
-var presentEta = function(eta){
-  var cssClasses = (eta.route||'').toLowerCase().concat('-route'),
-      departing = (eta.etd||0).toString().concat(" mins");
-
+var presentDeparture = function(departure){
   return {
-    cssClasses: cssClasses,
-    departing: departing
+    cssClasses: departure.route.toLowerCase().concat('-route'),
+    departing: departure.etd.toString().concat(" mins")
   };
 };
 
-module.exports = presentEta;
+module.exports = presentDeparture;

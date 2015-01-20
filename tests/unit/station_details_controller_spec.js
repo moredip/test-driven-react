@@ -1,4 +1,5 @@
 var Helpers = require('./helpers'),
+    a = require('./builders'),
     _ = require('underscore'),
     Q = require('q'),
     sinon = require('sinon');
@@ -7,7 +8,7 @@ var createStationDetailsController = require('../../js/station_details_controlle
     createStationRepo = require('../../js/station_repo');
 
 var dummyEtasRepo = {
-  fetchEtasFor: _.constant(Q([]))
+  fetchEtasFor: _.constant(Q([a.departure()]))
 };
 
 describe( 'stationDetailsController', function(){
@@ -34,7 +35,7 @@ describe( 'stationDetailsController', function(){
   it('looks up the station etas and includes them in the app state', function(){
     var someStation = { id: 'some-station-id', name: 'some-station-name' };
         stationRepo = createStationRepo([someStation]),
-        etasFromRepo = ['fake-eta-1','fake-eta-2'],
+        etasFromRepo = [a.departure(),a.departure()],
         etasRepo = {
           fetchEtasFor: _.constant(Q(etasFromRepo))
         },
