@@ -36,7 +36,6 @@ describe('the main station list', function() {
         },
         appContainer = document.createElement('main');
 
-    document.body.appendChild(appContainer);
     boot(appContainer,{etasRepo:fakeEtasRepo});
 
     expect($(appContainer)).to.exist;
