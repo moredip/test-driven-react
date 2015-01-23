@@ -12,8 +12,7 @@ SAMPLE DEPARTURE STRUCTURE:
 
 var presentDeparture = function(departure){
   return {
-    cssClasses: departure.route.toLowerCase().concat('-route'),
-    departing: departure.etd.toString().concat(" mins")
+    destination: departure.dest_name
   };
 };
 
