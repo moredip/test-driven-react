@@ -31,3 +31,4 @@ node_modules/.bin/testem -f tests/testem.json
 # TODOs
 
 - [ ] add jshint
+- [ ] add plumber to unit test watch
