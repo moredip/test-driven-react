@@ -10,20 +10,9 @@ SAMPLE DEPARTURE STRUCTURE:
 
 ******************/
 
-var presentEtd = function(etd){
-  if( etd === 0 ){
-    return "now";
-  }else if( etd === 1 ){
-    return "1 min";
-  }else{
-    return etd.toString().concat(" mins");
-  }
-}
-
 var presentDeparture = function(departure){
   return {
-    destination: departure.dest_name,
-    departing: presentEtd(departure.etd)
+    destination: departure.dest_name
   };
 };
 
