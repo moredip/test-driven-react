@@ -1,4 +1,5 @@
 var chaiThings = require('chai-things'),
+    chaiAsPromised = require('chai-as-promised'),
     sinonChai = require('sinon-chai');
 
 (function(global){
@@ -7,6 +8,7 @@ var chaiThings = require('chai-things'),
   global.expect = global.chai.expect;
 
   global.chai.use( chaiThings );
+  global.chai.use( chaiAsPromised );
   global.chai.use( sinonChai );
 })(global||window);
 
