@@ -6,6 +6,7 @@ var Helpers = require('./helpers'),
 var departurePresenter = require('../../js/departure_presenter');
 
 describe( 'Departure presenter', function(){
+
   it('presents the destination', function(){
     // Given
     var departure = {
@@ -20,8 +21,19 @@ describe( 'Departure presenter', function(){
     expect(presentation).to.have.property('destination','Ontario');
   });
   
-
-
+  it('presents an etd of 10 correctly', function(){
+    // Given
+    var departure = {
+      dest_name: "blah",
+      etd: 10
+    };
+    
+    // When
+    var presentation = departurePresenter(departure);
+    
+    // Then
+    expect(presentation).to.have.property('departing','10 mins');
+  });
 
 
 
