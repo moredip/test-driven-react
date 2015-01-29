@@ -3,7 +3,7 @@
 SAMPLE DEPARTURE STRUCTURE:
 
 {
-  dest_abbr: 'EMBR',
+  dest_name: 'EMBR',
   route: 'YELLOW',
   etd: 1
 }
