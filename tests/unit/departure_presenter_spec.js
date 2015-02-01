@@ -15,10 +15,10 @@ describe( 'Departure presenter', function(){
     };
     
     // When
-    var presentation = departurePresenter(departure);
+    var viewModel = departurePresenter(departure);
     
     // Then
-    expect(presentation).to.have.property('destination','Ontario');
+    expect(viewModel).to.have.property('destination','Ontario');
   });
   
   it('presents an etd of 10 correctly', function(){
@@ -29,10 +29,10 @@ describe( 'Departure presenter', function(){
     };
     
     // When
-    var presentation = departurePresenter(departure);
+    var viewModel = departurePresenter(departure);
     
     // Then
-    expect(presentation).to.have.property('departing','10 mins');
+    expect(viewModel).to.have.property('departing','10 mins');
   });
 
 
@@ -68,10 +68,10 @@ describe( 'Departure presenter', function(){
     //};
     
     //// When
-    //var presentation = departurePresenter(departure);
+    //var viewModel = departurePresenter(departure);
     
     //// Then
-    //expect(presentation).to.have.property('departing','10 mins');
+    //expect(viewModel).to.have.property('departing','10 mins');
   //});
   
   //it('presents the departure time for "1 min"', function(){
@@ -82,10 +82,10 @@ describe( 'Departure presenter', function(){
     //};
     
     //// When
-    //var presentation = departurePresenter(departure);
+    //var viewModel = departurePresenter(departure);
     
     //// Then
-    //expect(presentation).to.have.property('departing','1 min');
+    //expect(viewModel).to.have.property('departing','1 min');
   //});
 
   //it('presents the departure time for "now"', function(){
@@ -96,10 +96,10 @@ describe( 'Departure presenter', function(){
     //};
     
     //// When
-    //var presentation = departurePresenter(departure);
+    //var viewModel = departurePresenter(departure);
     
     //// Then
-    //expect(presentation).to.have.property('departing','now');
+    //expect(viewModel).to.have.property('departing','now');
   //});
 
 });
